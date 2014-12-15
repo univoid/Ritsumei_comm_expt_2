@@ -1,0 +1,19 @@
+@CHARSET "UTF-8";
+/* 自由に変更して構わない */
+table {
+ border-collapse: collapse;
+}
+/* ヘッダは背景色を変える */
+th {
+ border: solid 1px #000000;
+ background-color : #eeeeee;
+}
+/* テキストはセンタリング */
+td {
+ border: solid 1px #000000;
+ text-align: center;
+}
+/* 第一週提出課題用 */
+.goldmember {
+ color: #ff0000;
+}

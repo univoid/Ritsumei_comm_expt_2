@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="UTF-8">
+ <title>2014年度 情報コミュニケーション学実験II</title>
+ <link rel="stylesheet" href="css/bootstrap.css">
+ <style>
+  #console_area > .alert {
+   margin-bottom: 0px;
+  }
+ </style>
+</head>
+<body>
+<div class="container">
+ <h2>2014年度 情報コミュニケーション学実験II</h2>
+
+ <h3>Webアプリケーションの実験</h3>
+
+ <p>ユーザID: <span id="userid" class="text-danger"></span></p>
+
+ <div class="panel-group">
+  <div class="panel panel-default">
+   <div class="panel-heading">
+    <a class="panel-title" data-toggle="collapse" href="#collapse-week01">第１週の課題</a>
+   </div>
+   <div id="collapse-week01" class="list-group collapse">
+    <a class="list-group-item" href="Hello" target="_blank">課題1-1 文字列の表示</a>
+    <a class="list-group-item" href="CurrentTime"
+       target="_blank">課題1-2 現在の時刻の表示</a>
+    <a class="list-group-item list-group-item-danger"
+       href="TableExample" target="_blank">【提出課題】 表の出力</a>
+   </div>
+  </div>
+  <div class="panel panel-default">
+   <div class="panel-heading">
+    <a class="panel-title" data-toggle="collapse" href="#collapse-week02">第２週の課題</a>
+   </div>
+   <div id="collapse-week02" class="list-group collapse">
+    <a class="list-group-item" href="ShowAllMembers" target="_blank">課題2-1 会員の一覧の表示</a>
+    <a class="list-group-item" href="ShowAllMembersJSP"
+       target="_blank">課題2-2 JSPを使った表示</a>
+    <a class="list-group-item list-group-item-danger" href="ShowMembers"
+       target="_blank">【提出課題】 会員の一覧の表示（並べ換え）</a>
+   </div>
+  </div>
+
+  <div class="panel panel-default">
+   <div class="panel-heading">
+    <a class="panel-title" data-toggle="collapse" href="#collapse-week03">第３週の課題</a>
+   </div>
+   <div id="collapse-week03" class="list-group collapse">
+    <a class="list-group-item" href="SearchMembersByName"
+       target="_blank">課題3-1 名前による検索</a>
+    <a class="list-group-item"
+       href="SearchMembersByPoints" target="_blank">課題3-2 ポイント数による検索</a>
+    <a class="list-group-item" href="SearchMembersByJoinDate"
+       target="_blank">課題3-3 加入日による検索</a>
+    <a class="list-group-item list-group-item-danger"
+       href="SearchMembers" target="_blank">【提出課題】 会員の一覧の表示（絞り込み）</a>
+   </div>
+  </div>
+
+  <div class="panel panel-default">
+   <div class="panel-heading">
+    <a class="panel-title" data-toggle="collapse" href="#collapse-week04">第４週の課題</a>
+   </div>
+   <div id="collapse-week04" class="list-group collapse">
+    <a class="list-group-item" href="MembersDBReset" target="_blank">課題4-1 会員データベースの初期化</a>
+    <a class="list-group-item" href="Members/list"
+       target="_blank">課題4-2 会員の一覧表示</a>
+    <a class="list-group-item"
+       href="Members/delete/1" target="_blank">課題4-3 会員の削除</a>
+    <a class="list-group-item" href="Members/add" target="_blank">課題4-4 会員の追加</a>
+    <a class="list-group-item" href="Members/update/1"
+       target="_blank">課題4-5 会員データの編集</a>
+    <a class="list-group-item list-group-item-danger" href="Members/list"
+       target="_blank">【提出課題】 会員データの管理</a>
+   </div>
+  </div>
+
+  <div class="panel panel-default">
+   <div class="panel-heading">
+    <a class="panel-title" data-toggle="collapse" href="#collapse-week05">第５週の課題</a>
+   </div>
+   <div id="collapse-week05" class="list-group collapse">
+    <a class="list-group-item" href="FinalChallengeDBReset" target="_blank">【最終自由課題】データベース初期化</a>
+    <a class="list-group-item list-group-item-danger" href="FinalChallenge" target="_blank">【最終自由課題】</a>
+   </div>
+  </div>
+ </div>
+
+ <p><a class="btn btn-default" href="console" target="_blank">H2データベースのコンソールを開く</a></p>
+
+ <div class="panel panel-danger">
+  <div class="panel-heading">下のボタンをクリックすることで，例題のデータベースを初期状態に戻すことができる</div>
+  <div class="panel-body">
+   <p>
+    <button id="resetMembersDB_btn" class="btn btn-default">会員データベース(<code>members</code>)を初期状態に戻す</button>
+    <button id="resetUsersDB_btn" class="btn btn-default">ユーザデータベース(<code>users</code>)を初期状態に戻す</button>
+   </p>
+   <div id="console_area">
+   </div>
+  </div>
+ </div>
+</div>
+<!-- JS -->
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.js"></script>
+<script>
+ $(document).ready(function () {
+  var len = document.location.href.split('/').length;
+  var userid = '(ROOT)';
+  var context = '';
+  if (len > 4) {
+   userid = document.location.href.split('/')[3];
+   context = '/' + userid;
+  }
+
+  function setupConsoleArea(message, messageClass) {
+   $('#console_area').empty()
+     .append($('<div>').addClass('alert alert-dismissible').addClass(messageClass)
+       .append($('<button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>'))
+       .append($('<p>').text(message)));
+  }
+
+  $('#userid').text(userid);
+  $('#resetMembersDB_btn').on('click', function () {
+   setupConsoleArea('', 'alert-info');
+   $('#console_area').show();
+   $.ajax({
+    url: context + '/MembersDBReset',
+    type: 'post'
+   }).done(function () {
+    setupConsoleArea('会員データベースは初期状態に戻りました', 'alert-info');
+   }).fail(function (err) {
+    setupConsoleArea(err.statusText, 'alert-danger');
+   });
+  });
+  $('#resetUsersDB_btn').on('click', function () {
+   setupConsoleArea('', 'alert-info');
+   $('#console_area').show();
+   $.ajax({
+    url: context + '/UsersDBReset',
+    type: 'post'
+   }).done(function () {
+    setupConsoleArea('ユーザデータベースは初期状態に戻りました', 'alert-info');
+   }).fail(function (err) {
+    setupConsoleArea(err.statusText, 'alert-danger');
+   });
+  });
+ });
+</script>
+</body>
+</html>

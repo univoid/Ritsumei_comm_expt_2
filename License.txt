@@ -1,0 +1,7 @@
+H2 Database Engine
+
+http://www.h2database.com/html/license.html
+----------------------------------------------------------------
+JSP Standard Tab Library (http://jstl.java.net/)
+
+https://jstl.java.net/license.html
